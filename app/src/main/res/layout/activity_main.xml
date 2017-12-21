@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.smartstudy.paysdk.PaymentActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="选择支付方式"
+        android:textColor="#ff333333"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/aliPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/simple_item_bg"
+            android:drawableLeft="@drawable/ic_alipay"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_go_to"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="支付宝支付" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:background="#ffe5e5e5" />
+
+        <TextView
+            android:id="@+id/weChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/simple_item_bg"
+            android:drawableLeft="@drawable/ic_wechat"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_go_to"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="微信支付" />
+    </LinearLayout>
+
+</LinearLayout>

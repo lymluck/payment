@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PaySDK</string>
+    <string name="not_null">%1$s不能为空！</string>
+</resources>
