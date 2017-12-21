@@ -12,9 +12,6 @@ public class ConstantUtils {
     public static int READ_TIMEOUT = 10;
     //写入超时 30s
     public static int WRITE_TIMEOUT = 30;
-    public static final int REQUEST_WX_CODE = 1;
-    public static final int REQUEST_ALI_CODE = 2;
-    public static final int SDK_PAY_FLAG = 3;
     public static final int ERR_OTHER = 99999;
     public static final int WECHAT_NOT_INSTALLED_ERR = -5;
     public static final int WECHAT_UNSUPPORT_ERR = -6;
@@ -30,7 +27,7 @@ public class ConstantUtils {
     public static String URL_PAY_RESULT = "/pay/%1$s/result";
 
     /*********获取api接口url***********/
-    public static String getUrl(String url) {
-        return "http://api.staging.smartstudy.com/sdk" + url;
+    public static String getUrl(boolean debug, String url) {
+        return debug ? "http://api.staging.smartstudy.com/sdk" + url : "api.smartstudy.com/sdk" + url;
     }
 }

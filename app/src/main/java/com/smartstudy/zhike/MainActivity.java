@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.weChat:
+                //
                 ZkPayPlatform.with(this)
-                        .orderId("20171279991219")
+                        .orderId("20171236316862").setDebug(true)
                         .token("0nBRuNTHta96XEOHAT1pobV9aY6pmn6F")
                         .payway(PayWay.WXPay).productsName("托福100天")
                         .requestPay(new OnPayListener() {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.aliPay:
                 ZkPayPlatform.with(this)
-                        .orderId("20171279991219")
+                        .orderId("20171203468754").setDebug(true)
                         .token("0nBRuNTHta96XEOHAT1pobV9aY6pmn6F")
                         .payway(PayWay.ALiPay).productsName("托福100天")
                         .requestPay(new OnPayListener() {

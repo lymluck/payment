@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.smartstudy.paysdk.callback.Callback;
 import com.smartstudy.paysdk.config.RequestConfig;
+import com.smartstudy.paysdk.controller.PayController;
 import com.smartstudy.paysdk.enums.PayWay;
 import com.smartstudy.paysdk.server.RequestServer;
 import com.smartstudy.paysdk.util.ConstantUtils;
@@ -23,10 +24,10 @@ public class PayModel {
                 String url = "";
                 switch (payWay) {
                     case WXPay:
-                        url = ConstantUtils.getUrl(String.format(ConstantUtils.URL_WX_PAY, orderId));
+                        url = ConstantUtils.getUrl(PayController.getInstance().isDebug(), String.format(ConstantUtils.URL_WX_PAY, orderId));
                         break;
                     case ALiPay:
-                        url = ConstantUtils.getUrl(String.format(ConstantUtils.URL_ALI_PAY, orderId));
+                        url = ConstantUtils.getUrl(PayController.getInstance().isDebug(), String.format(ConstantUtils.URL_ALI_PAY, orderId));
                         break;
                     default:
                         break;
@@ -50,7 +51,7 @@ public class PayModel {
         RequestServer.getInstance().doGet(new RequestConfig<String>() {
             @Override
             public String getUrl() {
-                return ConstantUtils.getUrl(String.format(ConstantUtils.URL_PAY_RESULT, orderId));
+                return ConstantUtils.getUrl(PayController.getInstance().isDebug(), String.format(ConstantUtils.URL_PAY_RESULT, orderId));
             }
 
             @Override

@@ -22,7 +22,7 @@
  * 2.使用：导入项目中的模块payment，在支付时调用如下方法
  
         ZkPayPlatform.with(this)
-            .orderId("20171279991219")
+            .orderId("20171279991219").setDebug(true)
             .token("0nBRuNTHta96XEOHAT1pobV9aY6pmn6F")
             .payway(PayWay.WXPay).productsName("托福100天")
             .requestPay(new OnPayListener() {

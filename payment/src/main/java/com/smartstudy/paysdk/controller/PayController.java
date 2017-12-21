@@ -47,6 +47,7 @@ public class PayController {
     private PayWay mPayWay;
     private String mSerial;
     private IWXAPI mWXapi;
+    private boolean debug;
 
     public static PayController mInstance;
 
@@ -55,6 +56,15 @@ public class PayController {
             mInstance = new PayController();
         }
         return mInstance;
+    }
+
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public PayController setDebug(boolean debug) {
+        this.debug = debug;
+        return this;
     }
 
     public IWXAPI getWXapi() {
