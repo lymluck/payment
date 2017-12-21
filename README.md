@@ -1,7 +1,7 @@
 ### 使用说明：So easy!
  * 1.配置：在AndroidManifest.xml中添加微信和支付宝支付的配置文件
        
-       <!-- 微信支付 sdk ，也是 pay sdk 调用入口 -->
+        <!-- 微信支付 sdk ，也是 pay sdk 调用入口 -->
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
