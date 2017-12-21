@@ -6,7 +6,6 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:targetActivity="com.smartstudy.paysdk.PaymentActivity" />
-      
         <!-- 支付宝 sdk -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
