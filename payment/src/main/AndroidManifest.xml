@@ -14,8 +14,7 @@
 
         <activity
             android:name=".PaymentActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

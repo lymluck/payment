@@ -16,6 +16,8 @@ public class ConstantUtils {
     public static final int REQUEST_ALI_CODE = 2;
     public static final int SDK_PAY_FLAG = 3;
     public static final int ERR_OTHER = 99999;
+    public static final int WECHAT_NOT_INSTALLED_ERR = -5;
+    public static final int WECHAT_UNSUPPORT_ERR = -6;
     //获取信息失败提示信息
     public static final String GET_DATA_FAILED = "获取数据失败,请稍候重试!";
     public static final String WECHAT_PAY_RESULT_ACTION = "com.tencent.mm.opensdk.WECHAT_PAY_RESULT_ACTION";

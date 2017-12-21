@@ -27,9 +27,11 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.Map;
 
+import static com.smartstudy.paysdk.util.ConstantUtils.WECHAT_NOT_INSTALLED_ERR;
 import static com.smartstudy.paysdk.util.ConstantUtils.WECHAT_PAY_COMMAND;
 import static com.smartstudy.paysdk.util.ConstantUtils.WECHAT_PAY_RESULT_ACTION;
 import static com.smartstudy.paysdk.util.ConstantUtils.WECHAT_PAY_RESULT_EXTRA;
+import static com.smartstudy.paysdk.util.ConstantUtils.WECHAT_UNSUPPORT_ERR;
 
 /**
  * Created by louis on 2017/12/15.
@@ -44,6 +46,8 @@ public class PayController {
     private String mProductsName;
     private PayWay mPayWay;
     private String mSerial;
+    private IWXAPI mWXapi;
+
     public static PayController mInstance;
 
     public static PayController getInstance() {
@@ -51,6 +55,10 @@ public class PayController {
             mInstance = new PayController();
         }
         return mInstance;
+    }
+
+    public IWXAPI getWXapi() {
+        return mWXapi;
     }
 
     public PayController get(Activity context) {
@@ -122,14 +130,13 @@ public class PayController {
     /**
      * 验证支付结果
      *
-     * @param context
      * @param callback
      */
-    private void verifyPayResult(final Context context, final ServerResultCallback callback) {
+    private void verifyPayResult(final ServerResultCallback callback) {
         PayModel.verifyPayResult(mOrderId, mToken, mSerial, new Callback<String>() {
             @Override
             public void onErr(String msg) {
-                ToastUtils.shortToast(context, msg);
+                ToastUtils.shortToast(mContext, msg);
             }
 
             @Override
@@ -151,7 +158,16 @@ public class PayController {
      * @param onPayListener
      */
     private void goWXPay(WXPayBean result, OnPayListener onPayListener) {
-        IWXAPI api = WXAPIFactory.createWXAPI(mContext, result.getAppid(), true);
+        mWXapi = WXAPIFactory.createWXAPI(mContext, result.getAppid(), true);
+        if (!mWXapi.isWXAppInstalled()) {
+            onPayListener.onPayFailure(PayWay.WXPay, WECHAT_NOT_INSTALLED_ERR);
+            return;
+        }
+
+        if (!mWXapi.isWXAppSupportAPI()) {
+            onPayListener.onPayFailure(PayWay.WXPay, WECHAT_UNSUPPORT_ERR);
+            return;
+        }
         PayReq req = new PayReq();
         req.appId = result.getAppid();
         req.partnerId = result.getPartnerid();
@@ -160,9 +176,9 @@ public class PayController {
         req.nonceStr = result.getNoncestr();
         req.timeStamp = result.getTimestamp();
         req.sign = result.getSign();
-        api.registerApp(result.getAppid());
-        registPayResultBroadcast(mContext, onPayListener);
-        api.sendReq(req);
+        mWXapi.registerApp(result.getAppid());
+        registPayResultBroadcast(onPayListener);
+        mWXapi.sendReq(req);
     }
 
     /**
@@ -197,7 +213,7 @@ public class PayController {
         final String status = payResult.get("resultStatus");
         if ("9000".equals(status) || "8000".equals(status)) {
             //订单支付成功，验证结果
-            verifyPayResult(mContext, new ServerResultCallback() {
+            verifyPayResult(new ServerResultCallback() {
                 @Override
                 public void unPaid() {
                     //客户端成功，服务端失败
@@ -219,11 +235,10 @@ public class PayController {
     /**
      * 注册接收数据广播
      *
-     * @param context
      * @param onPayListener
      */
-    private void registPayResultBroadcast(Context context, OnPayListener onPayListener) {
-        mBroadcastManager = LocalBroadcastManager.getInstance(context.getApplicationContext());
+    private void registPayResultBroadcast(OnPayListener onPayListener) {
+        mBroadcastManager = LocalBroadcastManager.getInstance(mContext.getApplicationContext());
         mPayListener = onPayListener;
         IntentFilter filter = new IntentFilter(WECHAT_PAY_RESULT_ACTION);
         mBroadcastManager.registerReceiver(mReceiver, filter);
@@ -236,9 +251,7 @@ public class PayController {
         if (mBroadcastManager != null && mReceiver != null) {
             mBroadcastManager.unregisterReceiver(mReceiver);
             mBroadcastManager = null;
-            mReceiver = null;
             mContext = null;
-            mPayListener = null;
         }
     }
 
@@ -254,7 +267,7 @@ public class PayController {
             if (type == ConstantsAPI.COMMAND_PAY_BY_WX) {
                 if (result == 0) {
                     //订单支付成功，验证结果
-                    verifyPayResult(context, new ServerResultCallback() {
+                    verifyPayResult(new ServerResultCallback() {
                         @Override
                         public void unPaid() {
                             //客户端成功，服务端失败
