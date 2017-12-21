@@ -19,7 +19,7 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
- * 2.使用
+ * 2.使用：导入项目中的模块payment，在支付时调用如下方法
  
         ZkPayPlatform.with(this)
             .orderId("20171279991219")
