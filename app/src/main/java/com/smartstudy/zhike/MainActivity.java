@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.aliPay:
                 ZkPayPlatform.with(this)
+                        .orderId("20171279991219")
                         .token("0nBRuNTHta96XEOHAT1pobV9aY6pmn6F")
                         .payway(PayWay.ALiPay).productsName("托福100天")
                         .requestPay(new OnPayListener() {

@@ -20,10 +20,10 @@ import com.smartstudy.paysdk.enums.PayWay;
 import com.smartstudy.paysdk.model.PayModel;
 import com.smartstudy.paysdk.util.ConstantUtils;
 import com.smartstudy.paysdk.util.ToastUtils;
-import com.tencent.mm.sdk.constants.ConstantsAPI;
-import com.tencent.mm.sdk.modelpay.PayReq;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.Map;
 
@@ -46,15 +46,16 @@ public class PayController {
     private String mSerial;
     public static PayController mInstance;
 
-    public PayController(Activity context) {
-        this.mContext = context;
-    }
-
-    public static PayController getInstance(Activity context) {
+    public static PayController getInstance() {
         if (null == mInstance) {
-            mInstance = new PayController(context);
+            mInstance = new PayController();
         }
         return mInstance;
+    }
+
+    public PayController get(Activity context) {
+        this.mContext = context;
+        return this;
     }
 
     public PayController payway(PayWay payWay) {
@@ -279,7 +280,9 @@ public class PayController {
      * 参数校验
      */
     private void checkArgs() {
-        if (TextUtils.isEmpty(mPayWay.toString())) {
+        if (mContext == null) {
+            throw new IllegalArgumentException("You cannot start a load on a null Context");
+        } else if (TextUtils.isEmpty(mPayWay.toString())) {
             throw new IllegalArgumentException("Please specify the \"payway\" of payment!");
         } else if (TextUtils.isEmpty(mOrderId)) {
             throw new IllegalArgumentException("Please specify the \"orderId\" of payment!");

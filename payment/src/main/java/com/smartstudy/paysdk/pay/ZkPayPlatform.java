@@ -12,11 +12,13 @@ public class ZkPayPlatform {
 
     /**
      * 智课支付SDK
+     *
      * @param context
      * @return
      */
     public static PayController with(Activity context) {
-        PayController controller = PayController.getInstance(context);
+        PayController controller = PayController.getInstance();
+        controller.get(context);
         return controller;
     }
 }

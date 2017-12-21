@@ -25,6 +25,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:+'
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.alibaba:fastjson:1.1.67.android'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     compile files('libs/alipaySdk-20170922.jar')
-    compile files('libs/libammsdk.jar')
 }
