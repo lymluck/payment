@@ -1,12 +1,12 @@
 ## 使用说明：So easy!
 
- ### 介绍：
+ ###  介绍：
  
         ZkPayPlatform是智课内部使用的Android端支付SDK,目前仅支持微信和支付宝支付.
         
- ### 使用
+ ###  使用
  
- #### 1.配置：在AndroidManifest.xml中添加微信和支付宝支付的配置文件
+ ####  1.配置：在AndroidManifest.xml中添加微信和支付宝支付的配置文件
        
         <!-- 微信支付 sdk ，也是 pay sdk 调用入口 -->
         <activity-alias
@@ -27,7 +27,7 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
  
- #### 2.集成：
+ ####  2.集成：
  
  * Gradle
   
@@ -44,7 +44,7 @@
           <type>pom</type>
         </dependency>
         
-  #### 3.支付：
+  ####  3.支付：
   
         ZkPayPlatform.with(this)
             .orderId("20171279991219").setDebug(true)
@@ -70,7 +70,7 @@
      1. orderId，token，payway为必须参数，sdk有做参数校验，其它的参数非必传;<br /><br />
      2. debug模式表示切换到服务端的测试环境地址
     
-  ### 技术支持
+  ###  技术支持
  
        作者：louis 
        邮箱：luoyongming@innobuddy.com
