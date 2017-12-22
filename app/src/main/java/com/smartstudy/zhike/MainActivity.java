@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.weChat:
-                //
                 ZkPayPlatform.with(this)
                         .orderId("20171236316862").setDebug(true)
                         .token("0nBRuNTHta96XEOHAT1pobV9aY6pmn6F")
