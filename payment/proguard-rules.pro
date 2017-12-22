@@ -20,6 +20,17 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-dontwarn okhttp3.**
+-keep class okhttp3.**{*;}
+-dontwarn okio.**
+-keep class okio.**{*;}
+-dontwarn javax.annotation.**
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+-dontwarn android.net.**
+-keep class android.net.SSLCertificateSocketFactory{*;}
+
 -keep class com.alipay.android.app.IAlixPay{*;}
 -keep class com.alipay.android.app.IAlixPay$Stub{*;}
 -keep class com.alipay.android.app.IRemoteServiceCallback{*;}

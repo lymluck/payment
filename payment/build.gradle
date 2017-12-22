@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
@@ -13,7 +14,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -27,4 +29,14 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.67.android'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     compile files('libs/alipaySdk-20170922.jar')
+}
+
+//添加
+publish {
+    userOrg = 'lymluck'//bintray.com用户名
+    groupId = 'com.smartstudy'//jcenter上的路径
+    artifactId = 'payment'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    website = 'https://github.com/lymluck/payment'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
