@@ -28,6 +28,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
  
  #### 2.集成：
+ 
  * Gradle
   
         dependencies {
